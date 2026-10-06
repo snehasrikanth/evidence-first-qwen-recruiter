@@ -40,6 +40,7 @@ A FastAPI API and Streamlit UI are also available for local use.
 ```bash
 pip install -r requirements-recruit.txt
 streamlit run streamlit_app.py                    # UI, http://localhost:8501
+cd frontend && npm install && npm run dev         # React UI, http://localhost:5173 (proxies to API :8765)
 uvicorn recruit_assistant.main:app --reload --port 8010   # REST API, http://127.0.0.1:8010/docs (8000 is the model tunnel)
 python tools/screen_resumes.py --role r001 --resumes work/applicants/   # after approve_role
 python tools/screen_resumes.py --title "Senior Applied AI Scientist" \

@@ -217,16 +217,34 @@ def slack_report(job_name, results, notice):
     return "\n".join(lines)
 
 
+DEMOS = {
+    "applied-ai": {
+        "title": "Senior Applied AI Scientist",
+        "jd": "requests/applied-ai-scientist.txt",
+        "resumes": "demo-applicants",
+    }
+}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     src = p.add_mutually_exclusive_group(required=True)
     src.add_argument("--role")
     src.add_argument("--title")
+    src.add_argument("--demo", choices=sorted(DEMOS))
     p.add_argument("--jd-file")
-    p.add_argument("--resumes", nargs="+", required=True, help="resume files or directories")
+    p.add_argument("--resumes", nargs="+", help="resume files or directories")
     p.add_argument("--consent-confirmed", action="store_true")
     p.add_argument("--discover", action="store_true")
     args = p.parse_args()
+    if args.demo:
+        spec = DEMOS[args.demo]
+        args.title = spec["title"]
+        args.jd_file = str(_config.DATA_DIR / spec["jd"])
+        args.resumes = [str(_config.DATA_DIR / spec["resumes"])]
+        args.consent_confirmed = True
+    elif not args.resumes:
+        raise ValueError("--resumes is required unless --demo is set")
     if bool(args.title) != bool(args.jd_file):
         raise ValueError("--title and --jd-file go together")
     jd_text = Path(args.jd_file).read_text(encoding="utf-8") if args.jd_file else None

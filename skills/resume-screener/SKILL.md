@@ -9,10 +9,8 @@ Do not rewrite the JD. Do not invent scores.
 
 1. Save the JD to /tmp/jd.txt exactly as given.
 2. Slack uploads: call message action=download-file with fileId and channelId
-   once. If it fails with "File could not be downloaded", do not retry. Use
-   the repo fallback:
-   `--jd-file /sandbox/.openclaw/workspace/repo/data/requests/applied-ai-scientist.txt`
-   `--resumes /sandbox/.openclaw/workspace/repo/data/demo-applicants`
+   once. If it fails, or they say "screen the demo", run only:
+   `python3 /sandbox/.openclaw/workspace/repo/tools/screen_resumes.py --demo applied-ai`
 3. Ask once if needed: "Were the applicants told their public GitHub/LinkedIn may be reviewed?"
 4. Run:
 

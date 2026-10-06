@@ -229,3 +229,7 @@ work/*
 
 # recruit_assistant job intake data (resumes, manifests)
 .data/
+
+# React frontend
+frontend/node_modules/
+frontend/dist/

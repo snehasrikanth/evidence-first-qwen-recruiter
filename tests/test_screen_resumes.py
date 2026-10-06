@@ -6,6 +6,7 @@ import pytest
 for _dep in ("fastapi", "pydantic", "docx"):
     pytest.importorskip(_dep, reason="recruit_assistant deps missing: pip install -r requirements-recruit.txt")
 
+import _config
 import _db
 import screen_resumes
 
@@ -123,6 +124,15 @@ def test_title_mode_routes_to_human_review_when_model_unavailable(resumes, mock_
     assert {r["route"] for r in out["results"]} == {"human_review_required"}
     assert "Fit review: Backend" in out["slack"]
     assert out["notice"] in out["slack"]
+
+
+def test_demo_applied_ai_uses_bundled_jd_and_resumes():
+    spec = screen_resumes.DEMOS["applied-ai"]
+    jd = _config.DATA_DIR / spec["jd"]
+    resumes = _config.DATA_DIR / spec["resumes"]
+    assert jd.is_file()
+    assert resumes.is_dir()
+    assert list(resumes.glob("*.txt"))
 
 
 def test_slack_report_lists_scores_and_gaps():

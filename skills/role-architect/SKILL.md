@@ -18,15 +18,14 @@ Tools live at /sandbox/.openclaw/workspace/repo/tools/
 
    Slack attachments: try download-file ONCE with action=download-file,
    fileId=F..., and the current channelId. Do not use a generic send/read
-   message call. If that returns "File could not be downloaded", stop. Do
-   not retry the other file IDs. Slack file download is broken in this
-   sandbox. Fall back immediately to the repo copies:
+   message call. If that returns "File could not be downloaded", or the
+   manager says "screen the demo" / "Applied AI demo", stop. Do not retry
+   file IDs. Run this one command:
 
-   python3 /sandbox/.openclaw/workspace/repo/tools/screen_resumes.py \
-     --title "Senior Applied AI Scientist" \
-     --jd-file /sandbox/.openclaw/workspace/repo/data/requests/applied-ai-scientist.txt \
-     --resumes /sandbox/.openclaw/workspace/repo/data/demo-applicants \
-     --consent-confirmed
+   python3 /sandbox/.openclaw/workspace/repo/tools/screen_resumes.py --demo applied-ai
+
+   Tell the manager in one line that Slack could not download the uploads,
+   so the bundled Applied AI demo resumes were scored. Then paste `slack`.
 
    Tell the manager in one line that Slack could not download the uploads,
    so the same named demo resumes in the repo were scored.
